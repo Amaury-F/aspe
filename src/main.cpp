@@ -1,24 +1,16 @@
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 
 using namespace sf;
 
 int main() {
-    
-    RenderWindow window(VideoMode(800, 600), "hey");
-    while (window.isOpen()) {
-        Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == Event::Closed) {
-                window.close();
-            }
-        }
 
-        window.clear(Color::Black);
+    Game game;
 
-
-
-
-        window.display();
+    while (game.isRunning()) {
+        game.handleEvents();
+        game.updateModel();
+        game.renderWindow();
     }
     return 0;
 }
