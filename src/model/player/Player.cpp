@@ -31,26 +31,26 @@ bool Player::onGround() {
     return pos.y >= GROUND_Y;
 }
 
-void Player::handleKeys(std::vector<bool> *keysPressed) {
+void Player::handleKeys(const bool *keysPressed) {
     Pair speed(0,0);
 
     // Set speed according to keys
-    if ((*keysPressed)[Controls::LEFT]) {
+    if (keysPressed[Controls::LEFT]) {
         speed += Pair(-5, 0);
     }
-    if ((*keysPressed)[Controls::RIGHT]) {
+    if (keysPressed[Controls::RIGHT]) {
         speed += Pair(5, 0);
     }
 
-    if ((*keysPressed)[Controls::JUMP] && onGround()) {
-        speed += Pair(0, -10);
+    if (keysPressed[Controls::JUMP] && onGround()) {
+        speed += Pair(0, -50);
     }
 
     setSpeed(speed);
 }
 
 
-void Player::update(std::vector<bool> *keysPressed) {
+void Player::update(const bool *keysPressed) {
     setSpeed(Pair(0,0));
     handleKeys(keysPressed);
 

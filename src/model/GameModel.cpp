@@ -10,7 +10,7 @@
 GameModel::GameModel(): player(new Player(Pair(0,0))) {
 }
 
-void GameModel::update(std::vector<bool> *keysPressed) {
+void GameModel::update(const bool *keysPressed) {
     player->update(keysPressed);
 }
 

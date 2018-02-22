@@ -22,14 +22,14 @@ public:
         NBR_CTRLS = 5
     };
 
-    static std::vector<sf::Keyboard::Key> getBindings();
+    static sf::Keyboard::Key * getBindings();
 
 private:
     Controls() = default;
     ~Controls() = default;
 
     //tableau d'association touche-action
-    static std::vector<sf::Keyboard::Key> bindings;
+    static sf::Keyboard::Key bindings[NBR_CTRLS];
 
 };
 

@@ -13,7 +13,7 @@ public :
     GameModel();
     ~GameModel();
 
-    void update(std::vector<bool> *keysPressed);
+    void update(const bool *keysPressed);
     Player getEntities();
 
 private :

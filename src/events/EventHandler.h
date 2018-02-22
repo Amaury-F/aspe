@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <SFML/Window/Window.hpp>
+#include "Controls.h"
 
 //chef du paquetage events
 class EventHandler {
@@ -15,13 +16,15 @@ public:
     ~EventHandler();
 
     void pullEvents();
-    std::vector<bool> * getPressedKeys() const;
+
+    //tableau des touches pressées
+    bool * getPressedKeys() const;
 
 private:
     //fenêtre principale
     sf::Window *context;
     //tableau des contrôles préssés (case == enum Cntrl de Controls)
-    std::vector<bool> *keysPressed;
+    bool keysPressed[Controls::NBR_CTRLS];
 
 };
 

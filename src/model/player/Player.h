@@ -18,10 +18,10 @@ public:
     bool onGround();
 
     //tout le mouvement, etc
-    void update(std::vector<bool> *keysPressed);
+    void update(const bool *keysPressed);
 
     void moveTo(Pair pos);
-    void handleKeys(std::vector<bool> *keysPressed);
+    void handleKeys(const bool *keysPressed);
     void setSpeed(Pair speed);
     void move();
 

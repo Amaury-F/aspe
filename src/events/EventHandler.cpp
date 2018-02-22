@@ -9,14 +9,13 @@
 using namespace sf;
 
 EventHandler::EventHandler(sf::Window *context):
-        context(context),
-        keysPressed(new std::vector<bool>(Controls::NBR_CTRLS))
+        context(context)
         {
 }
 
 EventHandler::~EventHandler() = default;
 
-std::vector<bool> * EventHandler::getPressedKeys() const {
+bool * EventHandler::getPressedKeys() const {
     return keysPressed;
 }
 
@@ -31,9 +30,9 @@ void EventHandler::pullEvents() {
 
     }
 
-    std::vector<Keyboard::Key> bindings = Controls::getBindings();
+    Keyboard::Key *bindings = Controls::getBindings();
     for (int i = 0; i < Controls::NBR_CTRLS; ++i) {
-        (*keysPressed)[i] = Keyboard::isKeyPressed(bindings[i]);
+        keysPressed[i] = Keyboard::isKeyPressed(bindings[i]);
     }
 }
 

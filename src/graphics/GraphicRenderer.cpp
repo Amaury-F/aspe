@@ -16,7 +16,7 @@ GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600
     context->setFramerateLimit(30);
 }
 
-GraphicRenderer::~GraphicRenderer() = default;
+GraphicRenderer::~GraphicRenderer() = default; //TODO détruire context
 
 sf::RenderWindow *GraphicRenderer::getContext() {
     return context;

@@ -7,7 +7,7 @@
 using namespace sf;
 
 //trivial, espace <=> jump
-std::vector<sf::Keyboard::Key> Controls::bindings {
+sf::Keyboard::Key Controls::bindings[] {
         Keyboard::Key::Up,
         Keyboard::Key::Down,
         Keyboard::Key::Left,
@@ -15,7 +15,7 @@ std::vector<sf::Keyboard::Key> Controls::bindings {
         Keyboard::Key::Space
 };
 
-std::vector<sf::Keyboard::Key> Controls::getBindings() {
+sf::Keyboard::Key * Controls::getBindings() {
     return bindings;
 }
 
