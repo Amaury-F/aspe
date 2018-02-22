@@ -15,7 +15,7 @@ EventHandler::EventHandler(sf::Window *context):
 
 EventHandler::~EventHandler() = default;
 
-bool * EventHandler::getPressedKeys() const {
+bool * EventHandler::getPressedKeys() {
     return keysPressed;
 }
 

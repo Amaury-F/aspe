@@ -18,7 +18,7 @@ public:
     void pullEvents();
 
     //tableau des touches pressées
-    bool * getPressedKeys() const;
+    bool * getPressedKeys();
 
 private:
     //fenêtre principale
