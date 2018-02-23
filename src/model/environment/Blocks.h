@@ -5,6 +5,7 @@
 #ifndef JEU2D_BLOCKS_H
 #define JEU2D_BLOCKS_H
 
+typedef char block;
 
 class Blocks {
 public:
