@@ -3,11 +3,14 @@
 //
 
 #include <vector>
+#include <iostream>
 #include "GameModel.h"
 #include "../events/EventHandler.h"
 
-//TODO trouver meilleure initialisation
+
 GameModel::GameModel(): player(new Player(Pair(0,0))) {
+    level = new Level(32, 32);
+    level->loadTerrain("../assets/map/test32-32.lvl");
 }
 
 void GameModel::update(const bool *keysPressed) {
@@ -16,6 +19,14 @@ void GameModel::update(const bool *keysPressed) {
 
 Player GameModel::getEntities() {
     return *player;
+}
+
+Level * GameModel::getLevel() {
+    return level;
+}
+
+void GameModel::loadLevel(Level *level) {
+    this->level = level;
 }
 
 GameModel::~GameModel() = default;

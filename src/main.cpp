@@ -1,10 +1,9 @@
-#include <SFML/Graphics.hpp>
 #include "Game.h"
 
 using namespace sf;
 
-int main() {
 
+int main() {
     Game game;
 
     while (game.isRunning()) {

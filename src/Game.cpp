@@ -2,6 +2,7 @@
 // Created by fauveama on 18/01/18.
 //
 
+#include <iostream>
 #include "Game.h"
 #include "events/EventHandler.h"
 
@@ -26,7 +27,7 @@ void Game::updateModel() {
 }
 
 void Game::renderWindow() {
-    graphicRenderer->render(gameModel->getEntities());
+    graphicRenderer->render(gameModel->getEntities(), *gameModel->getLevel());
 }
 
 bool Game::isRunning() {

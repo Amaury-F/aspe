@@ -12,16 +12,14 @@ using namespace std;
 Level::Level(size_t w, size_t h):
     width(w),
     height(h),
-    terrain(new block*[width]) {
+    terrain(new block*[w]) {
 
     for (size_t i = 0; i < width; ++i) {
         terrain[i] = new block[height];
     }
 }
 
-Level::~Level() {
-
-}
+Level::~Level() = default;
 
 void Level::loadTerrain(std::string filename) {
     ifstream in(filename, ios::in);
@@ -37,16 +35,18 @@ void Level::loadTerrain(std::string filename) {
     in.close();
 }
 
-block Level::getBlockAt(Pair pos) {
-    if (pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height) {
+block Level::getBlockAt(Pair pos) const {
+    if (pos.x < 0 || pos.y < 0 || pos.x >= width * BLOCK_SIZE || pos.y >= height * BLOCK_SIZE) {
         return Blocks::AIR;
     }
 
-    Pair cell(pos);
-    cell.x /= BLOCK_SIZE;
-    cell.y /= BLOCK_SIZE;
+    Pair cell = getCellOf(pos);
 
     return terrain[cell.x][cell.y];
+}
+
+Pair Level::getCellOf(Pair pos) {
+    return pos / Pair(BLOCK_SIZE, BLOCK_SIZE);;
 }
 
 

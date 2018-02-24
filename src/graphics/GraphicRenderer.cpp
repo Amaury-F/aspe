@@ -3,10 +3,12 @@
 //
 
 #include "GraphicRenderer.h"
+#include "../model/ModelConstants.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <iostream>
 
 using namespace sf;
 
@@ -22,13 +24,15 @@ sf::RenderWindow *GraphicRenderer::getContext() {
     return context;
 }
 
-void GraphicRenderer::render(Player player) {
+void GraphicRenderer::render(Player player, const Level &level) {
 
     // Init: clearing openGL context.
     context->clear(Color(0, 0, 0));
 
+    drawBlocks(player.getPos(), level);
+
     // Create player's sprite and colour.
-    RectangleShape sprite(Vector2f(16, 16));
+    RectangleShape sprite(Vector2f(ENTITY_SIZE, ENTITY_SIZE));
     sprite.setFillColor(Color(100, 240, 50));
 
     // Place sprite.
@@ -40,4 +44,34 @@ void GraphicRenderer::render(Player player) {
 
     // Display.
     context->display();
+}
+
+#define RENDER_DISTANCE 20 * BLOCK_SIZE
+
+void GraphicRenderer::drawBlocks(const Pair &playerPos,const Level &level) {
+
+    for (int i = playerPos.x - RENDER_DISTANCE; i <= playerPos.x + RENDER_DISTANCE; i+=BLOCK_SIZE) {
+        for (int j = playerPos.y - RENDER_DISTANCE; j <= playerPos.y + RENDER_DISTANCE; j+=BLOCK_SIZE) {
+
+            block b = level.getBlockAt(Pair(i, j));
+
+            if (b == Blocks::AIR) {
+                RectangleShape airSprite(Vector2f(BLOCK_SIZE, BLOCK_SIZE));
+                airSprite.setFillColor(Color(50, 100, 240));
+
+                Pair blockPos = Level::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
+                airSprite.move((float) blockPos.x, (float) blockPos.y);
+
+                context->draw(airSprite);
+            } else {
+                RectangleShape groundSprite(Vector2f(BLOCK_SIZE, BLOCK_SIZE));
+                groundSprite.setFillColor(Color(240, 50, 100));
+
+                Pair blockPos = Level::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
+                groundSprite.move((float) blockPos.x, (float) blockPos.y);
+
+                context->draw(groundSprite);
+            }
+        }
+    }
 }

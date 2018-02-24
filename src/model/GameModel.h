@@ -7,6 +7,7 @@
 
 
 #include "player/Player.h"
+#include "map/Level.h"
 
 class GameModel {
 public :
@@ -15,9 +16,12 @@ public :
 
     void update(const bool *keysPressed);
     Player getEntities();
+    Level * getLevel();
+    void loadLevel(Level *level);
 
 private :
     Player *player;
+    Level *level;
 };
 
 

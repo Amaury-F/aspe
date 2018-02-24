@@ -7,7 +7,7 @@
 #include "../../events/Controls.h"
 
 #define GRAVITY 6
-#define GROUND_Y 300
+#define GROUND_Y 252
 
 Player::Player(Pair pos): pos(pos), speed(0,0) {}
 

@@ -22,7 +22,8 @@ public:
      */
     void loadTerrain(std::string filename);
 
-    block getBlockAt(Pair pos);
+    block getBlockAt(Pair pos) const;
+    static Pair getCellOf(Pair pos);
 
 private:
     block ** terrain;

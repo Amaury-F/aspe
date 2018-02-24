@@ -5,6 +5,7 @@
 #ifndef JEU2D_PAIR_H
 #define JEU2D_PAIR_H
 
+#include <iostream>
 
 class Pair {
 public:
@@ -27,6 +28,8 @@ public:
     Pair operator-(const Pair &a);
     Pair operator*(const Pair &a);
     Pair operator/(const Pair &a);
+
+    friend std::ostream& operator<<(std::ostream& flux, const Pair& p);
 
 };
 
