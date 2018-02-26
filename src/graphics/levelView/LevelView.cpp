@@ -24,7 +24,7 @@ LevelView::~LevelView() = default;
 void LevelView::loadView(std::string filename) {
     ifstream in(filename, ios::in);
     if (!in) {
-        throw invalid_argument("cannot open file.");
+        throw invalid_argument("cannot open file : " + filename);
     }
 
     for (size_t j = 0; j < height; ++j) {

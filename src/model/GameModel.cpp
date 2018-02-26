@@ -10,7 +10,7 @@
 
 GameModel::GameModel(): player(new Player(Pair(0,0))) {
     level = new Level(32, 32);
-    level->loadTerrain("../assets/map/test32-32.lvl");
+    level->loadTerrain("../assets/map/test32-32/level.bin");
 }
 
 void GameModel::update(const bool *keysPressed) {

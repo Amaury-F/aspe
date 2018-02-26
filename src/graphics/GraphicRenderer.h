@@ -10,6 +10,7 @@
 #include "../model/player/Player.h"
 #include "../model/environment/Blocks.h"
 #include "../model/map/Level.h"
+#include "levelView/LevelView.h"
 
 //chef du paquetage graphics
 class GraphicRenderer {
@@ -21,11 +22,18 @@ public:
     //prendra plus tard un ensemble d'entités à afficher
     void render(Player player, const Level &level);
 
+    /**
+     * set view to the levelView stored in path
+     */
+    void setLevelView(const std::string path);
+
 private:
     //contexte d'affichage (fenêtre)
     sf::RenderWindow *context;
 
-    void drawBlocks(const Pair &playerPos, const Level &level);
+    LevelView *level;
+
+    void drawTiles(const Pair &playerPos);
 };
 
 
