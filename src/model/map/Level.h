@@ -11,6 +11,11 @@
 #include "../environment/Blocks.h"
 #include "../Pair.h"
 
+/**
+ * This class contains information on a level terrain :
+ * the blocks contained in it and their position
+ * the size of the level
+ */
 class Level {
 public:
     Level(size_t w, size_t h);
@@ -22,7 +27,16 @@ public:
      */
     void loadTerrain(std::string filename);
 
+    /**
+     * Get the block where position pos is in
+     */
     block getBlockAt(Pair pos) const;
+
+    Pair getSize() const;
+
+    /**
+     * get the block cell that contains pposition os
+     */
     static Pair getCellOf(Pair pos);
 
 private:

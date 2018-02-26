@@ -46,7 +46,10 @@ block Level::getBlockAt(Pair pos) const {
 }
 
 Pair Level::getCellOf(Pair pos) {
-    return pos / Pair(BLOCK_SIZE, BLOCK_SIZE);;
+    return pos / Pair(BLOCK_SIZE, BLOCK_SIZE);
 }
 
+Pair Level::getSize() const {
+    return Pair((int) width, (int) height);
+}
 
