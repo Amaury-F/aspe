@@ -8,8 +8,6 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../model/player/Player.h"
-#include "../model/environment/Blocks.h"
-#include "../model/map/Level.h"
 #include "levelView/LevelView.h"
 
 //chef du paquetage graphics
@@ -20,7 +18,7 @@ public:
 
     sf::RenderWindow * getContext();
     //prendra plus tard un ensemble d'entités à afficher
-    void render(Player player, const Level &level);
+    void render(Player player);
 
     /**
      * set view to the levelView stored in path
@@ -31,6 +29,7 @@ private:
     //contexte d'affichage (fenêtre)
     sf::RenderWindow *context;
 
+    TileSet *tileset;
     LevelView *level;
 
     void drawTiles(const Pair &playerPos);

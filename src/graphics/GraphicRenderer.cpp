@@ -8,6 +8,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 using namespace sf;
 
@@ -16,17 +17,23 @@ GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600
     context->setVerticalSyncEnabled(true);
     context->setFramerateLimit(30);
 
+    //load tileset
+    tileset = new TileSet();
+
     //load test level
     setLevelView("../assets/map/test32-32");
 }
 
-GraphicRenderer::~GraphicRenderer() = default; //TODO détruire context
+GraphicRenderer::~GraphicRenderer() {
+    delete context;
+    delete tileset;
+}
 
 sf::RenderWindow *GraphicRenderer::getContext() {
     return context;
 }
 
-void GraphicRenderer::render(Player player, const Level &level) {
+void GraphicRenderer::render(Player player) {
 
     // Init: clearing openGL context.
     context->clear(Color(0, 0, 0));
@@ -48,32 +55,35 @@ void GraphicRenderer::render(Player player, const Level &level) {
     context->display();
 }
 
-#define RENDER_DISTANCE 20 * BLOCK_SIZE
+#define RENDER_DISTANCE 40 * BLOCK_SIZE
 
 void GraphicRenderer::drawTiles(const Pair &playerPos) {
 
     for (int i = playerPos.x - RENDER_DISTANCE; i <= playerPos.x + RENDER_DISTANCE; i+=BLOCK_SIZE) {
         for (int j = playerPos.y - RENDER_DISTANCE; j <= playerPos.y + RENDER_DISTANCE; j+=BLOCK_SIZE) {
 
-            block b = level->getTileAt(Pair(i, j));
+            tile t = level->getTileAt(Pair(i, j));
 
-            if (b == Tiles::AIR) {
+            if (t == TileSet::AIR) {
                 RectangleShape airSprite(Vector2f(BLOCK_SIZE, BLOCK_SIZE));
                 airSprite.setFillColor(Color(50, 100, 240));
 
-                Pair blockPos = Level::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
+                Pair blockPos = LevelView::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
                 airSprite.move((float) blockPos.x, (float) blockPos.y);
 
                 context->draw(airSprite);
             } else {
-                RectangleShape groundSprite(Vector2f(BLOCK_SIZE, BLOCK_SIZE));
-                groundSprite.setFillColor(Color(240, 50, 100));
+                Sprite sprite;
+                Texture texture = *(tileset->getTexture());
+                sprite.setTexture(texture);
+                sprite.setTextureRect(tileset->tileToRect(t));
 
-                Pair blockPos = Level::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
-                groundSprite.move((float) blockPos.x, (float) blockPos.y);
+                Pair tilePos = LevelView::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
+                sprite.setPosition((float) tilePos.x, (float) tilePos.y);
 
-                context->draw(groundSprite);
+                context->draw(sprite);
             }
+
         }
     }
 }

@@ -37,7 +37,7 @@ void LevelView::loadView(std::string filename) {
 
 tile LevelView::getTileAt(Pair pos) const {
     if (pos.x < 0 || pos.y < 0 || pos.x >= width * BLOCK_SIZE || pos.y >= height * BLOCK_SIZE) {
-        return Tiles::AIR;
+        return TileSet::AIR;
     }
 
     Pair cell = getCellOf(pos);

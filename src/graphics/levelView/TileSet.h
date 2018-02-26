@@ -6,9 +6,11 @@
 #define JEU2D_TILES_H
 
 
+#include <SFML/Graphics/Texture.hpp>
+
 typedef char tile;
 
-class Tiles {
+class TileSet {
 public:
     enum Tles {
         AIR = 0,
@@ -18,9 +20,17 @@ public:
         NBR_TILES = STONE + 1
     };
 
+    TileSet();
+    ~TileSet();
+
+    sf::Texture * getTexture();
+    sf::IntRect tileToRect(tile t);
+
 private:
-    Tiles() = default;
-    ~Tiles() = default;
+
+    sf::Texture *data;
+    unsigned int width;
+    unsigned int height;
 
 };
 

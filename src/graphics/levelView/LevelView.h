@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <string>
 #include "../../model/Pair.h"
-#include "Tiles.h"
+#include "TileSet.h"
 
 /**
  * This class contains information on a level view :

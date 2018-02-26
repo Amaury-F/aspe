@@ -27,7 +27,7 @@ void Game::updateModel() {
 }
 
 void Game::renderWindow() {
-    graphicRenderer->render(gameModel->getEntities(), *gameModel->getLevel());
+    graphicRenderer->render(gameModel->getEntities());
 }
 
 bool Game::isRunning() {
