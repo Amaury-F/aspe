@@ -14,7 +14,7 @@ public:
         GROUND = 1,
         WALL = 2,
 
-        NBR_BLOCKS = 3
+        NBR_BLOCKS = WALL + 1
     };
 
 private:
