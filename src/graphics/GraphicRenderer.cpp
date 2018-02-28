@@ -3,15 +3,17 @@
 //
 
 #include "GraphicRenderer.h"
+#include "SpriteFactory.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
+//TODO charger une seule fois les sprites au lancement du jeu
 
 using namespace sf;
 
 GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600), "jeu2D")) {
-    // Set up graphic rendrering.
+    // Set up graphic rendering.
     context->setVerticalSyncEnabled(true);
     context->setFramerateLimit(30);
 }
@@ -27,11 +29,13 @@ void GraphicRenderer::render(Player player) {
     // Init: clearing openGL context.
     context->clear(Color(0, 0, 0));
 
-    // Create player's sprite and colour.
-    RectangleShape sprite(Vector2f(16, 16));
-    sprite.setFillColor(Color(100, 240, 50));
+    // Set player actual sprite
+    SpriteFactory spriteFactory;
+    spriteFactory.initTextures();
+    spriteFactory.setPlayerSprite(player);
 
     // Place sprite.
+    Sprite sprite = spriteFactory.getSprite();
     Pair pos = player.getPos();
     sprite.move((float) pos.x, (float) pos.y);
 

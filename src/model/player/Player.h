@@ -10,12 +10,21 @@
 
 // C'est le joueur.
 class Player {
+
 public:
+    enum PlayerState {
+        STANDING = 0,
+        MOVING_RIGHT = 1,
+        MOVING_LEFT = 2
+    };
+
     Player(Pair pos);
 
     Pair getPos() const {return pos;};
     Pair getSpeed() const {return speed;};
     bool onGround();
+    PlayerState getState() {return state;};
+    int getTexValue() {return texValue;};
 
     //tout le mouvement, etc
     void update(const bool *keysPressed);
@@ -28,7 +37,9 @@ public:
 private:
     Pair pos;
     Pair speed;
-
+    PlayerState state = STANDING;
+    PlayerState previousState = STANDING;
+    int texValue = 0;
 
 };
 
