@@ -91,6 +91,7 @@ void GraphicRenderer::drawTiles(const Pair &playerPos) {
 void GraphicRenderer::setLevelView(const std::string path) {
     delete level;
     std::string filename = path + "/view.bin";
-    level = new LevelView(32, 32);
+    level = new LevelView(32, 32); //TODO : set size based on the path (ex .../foo32-32)
+    //TODO : actually, put a setting file in every level dir with size, and possibly other infos (music, shaders...)
     level->loadView(filename);
 }
