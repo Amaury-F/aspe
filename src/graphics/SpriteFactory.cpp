@@ -4,7 +4,7 @@
 
 #include "SpriteFactory.h"
 
-#define PLAYER_SPRITE "/home/godarqu1/Documents/Application Informatique/jeu2d/assets/guy.png"
+#define PLAYER_SPRITE "../assets/guy.png"
 
 using namespace sf;
 
