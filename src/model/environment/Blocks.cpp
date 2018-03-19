@@ -26,6 +26,7 @@ bool Blocks::isDown(block b) {
 bool Blocks::isSlope(block b) {
     return Blocks::isUp(b) || Blocks::isDown(b);
 }
+
 int Blocks::slope(int x, block b) {
     if (b == Blocks::GROUND_SLOPENW1 || b == Blocks::GROUND_SLOPESE1
             || b == Blocks::WALL_SLOPENW1 || b == Blocks::WALL_SLOPESE1) {

@@ -57,11 +57,37 @@ public:
         NBR_BLOCKS = WALL_SLOPESE5 + 1
     };
 
+    /**
+     * Indique si b est un block de sol.
+     */
     bool isGround(block b);
+
+    /**
+     * Indique si b est un block de mur.
+     */
     bool isWall(block b);
+
+    /**
+     * Indique si b est un block de type pente et plafond.
+     */
     bool isUp(block b);
+
+    /**
+     * Indique si b est un block de type pente et sol.
+     */
     bool isDown(block b);
+
+    /**
+     * Indique si b est un block de type pente.
+     */
     bool isSlope(block b);
+
+    /**
+     * On associe à chaque type de blocks une fonction représentant sa pente.
+     * @pre
+     *      0 <= x <= BLOCK_SIZE
+     *      isSlope(b);
+     */
     int slope(int x, block b);
 
 private:
