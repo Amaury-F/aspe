@@ -7,7 +7,9 @@
 
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "../model/player/Player.h"
+#include "PlayerView.h"
+#include "SpriteFactory.h"
+
 //chef du paquetage graphics
 class GraphicRenderer {
 public:
@@ -16,11 +18,13 @@ public:
 
     sf::RenderWindow * getContext();
     //prendra plus tard un ensemble d'entités à afficher
-    void render(Player player);
+    void setTextures();
+    void render(PlayerView player);
 
 private:
     //contexte d'affichage (fenêtre)
     sf::RenderWindow *context;
+    SpriteFactory spriteFactory;
 };
 
 

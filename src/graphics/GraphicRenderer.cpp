@@ -24,14 +24,16 @@ sf::RenderWindow *GraphicRenderer::getContext() {
     return context;
 }
 
-void GraphicRenderer::render(Player player) {
+void GraphicRenderer::setTextures() {
+    spriteFactory.initTextures();
+}
+
+void GraphicRenderer::render(PlayerView player) {
 
     // Init: clearing openGL context.
     context->clear(Color(0, 0, 0));
 
     // Set player actual sprite
-    SpriteFactory spriteFactory;
-    spriteFactory.initTextures();
     spriteFactory.setPlayerSprite(player);
 
     // Place sprite.

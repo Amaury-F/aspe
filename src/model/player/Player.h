@@ -12,35 +12,20 @@
 class Player {
 
 public:
-    enum PlayerState {
-        STANDING = 0,
-        MOVING_RIGHT = 1,
-        MOVING_LEFT = 2
-    };
-
     Player(Pair pos);
 
     Pair getPos() const {return pos;};
     Pair getSpeed() const {return speed;};
     bool onGround();
-    PlayerState getState() {return state;};
-    int getTexValue() {return texValue;};
 
     //tout le mouvement, etc
-    void update(const bool *keysPressed);
-
     void moveTo(Pair pos);
-    void handleKeys(const bool *keysPressed);
     void setSpeed(Pair speed);
-    void move();
+    void move(Pair speed);
 
 private:
     Pair pos;
     Pair speed;
-    PlayerState state = STANDING;
-    PlayerState previousState = STANDING;
-    int texValue = 0;
-
 };
 
 

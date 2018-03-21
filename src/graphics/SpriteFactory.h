@@ -8,7 +8,7 @@
 #include <vector>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "../model/player/Player.h"
+#include "PlayerView.h"
 
 class SpriteFactory {
 
@@ -17,17 +17,14 @@ public:
     ~SpriteFactory();
 
     sf::Sprite getSprite();
-    Player::PlayerState getPreviousState();
 
     void initTextures();
-    void setPlayerSprite(Player player);
-    void setPreviousState(Player::PlayerState state);
+    void setPlayerSprite(PlayerView player);
 
 private:
     sf::Texture defaultTex;
-    sf::Texture playerTex[2][4];
+    sf::Texture playerTex[2][12];
     sf::Sprite sprite;
-    Player::PlayerState previousState;
 
 };
 
