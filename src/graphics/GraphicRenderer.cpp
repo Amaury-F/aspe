@@ -12,10 +12,13 @@
 
 using namespace sf;
 
-GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600), "jeu2D")) {
+GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600), "jeu2D")), view(new View(Vector2f(400, 300), Vector2f(800, 600))) {
     // Set up graphic rendrering.
     context->setVerticalSyncEnabled(true);
     context->setFramerateLimit(30);
+
+    // Set up view
+    context->setView(*view);
 
     //load tileset
     tileset = new TileSet();
@@ -27,10 +30,15 @@ GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600
 GraphicRenderer::~GraphicRenderer() {
     delete context;
     delete tileset;
+    delete view;
 }
 
 sf::RenderWindow *GraphicRenderer::getContext() {
     return context;
+}
+
+sf::View *GraphicRenderer::getView() {
+    return view;
 }
 
 void GraphicRenderer::render(Player player) {
@@ -47,6 +55,11 @@ void GraphicRenderer::render(Player player) {
     // Place sprite.
     Pair pos = player.getPos();
     sprite.move((float) pos.x, (float) pos.y);
+
+    float x = pos.x - getView()->getCenter().x;
+    float y = pos.y - getView()->getCenter().y;
+    getView()->setCenter(pos.x, pos.y);
+    getContext()->setView(*getView());
 
     // Draw.
     context->draw(sprite);

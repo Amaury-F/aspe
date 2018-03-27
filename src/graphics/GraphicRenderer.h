@@ -17,6 +17,7 @@ public:
     ~GraphicRenderer();
 
     sf::RenderWindow * getContext();
+    sf::View *getView();
     //prendra plus tard un ensemble d'entités à afficher
     void render(Player player);
 
@@ -28,6 +29,7 @@ public:
 private:
     //contexte d'affichage (fenêtre)
     sf::RenderWindow *context;
+    sf::View *view;
 
     TileSet *tileset;
     LevelView *level;
