@@ -56,8 +56,6 @@ void GraphicRenderer::render(Player player) {
     Pair pos = player.getPos();
     sprite.move((float) pos.x, (float) pos.y);
 
-    float x = pos.x - getView()->getCenter().x;
-    float y = pos.y - getView()->getCenter().y;
     getView()->setCenter(pos.x, pos.y);
     getContext()->setView(*getView());
 
