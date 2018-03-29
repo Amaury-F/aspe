@@ -12,13 +12,16 @@
 
 using namespace sf;
 
-GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600), "jeu2D")), view(new View(Vector2f(400, 300), Vector2f(800, 600))) {
+GraphicRenderer::GraphicRenderer() :
+        context(new RenderWindow(VideoMode(800, 600), "jeu2D")),
+        camera(new View(Vector2f(400, 256), Vector2f(VIEW_WIDTH, VIEW_HEIGHT))) {
+
     // Set up graphic rendrering.
     context->setVerticalSyncEnabled(true);
     context->setFramerateLimit(30);
 
     // Set up view
-    context->setView(*view);
+    context->setView(*camera);
 
     //load tileset
     tileset = new TileSet();
@@ -30,16 +33,14 @@ GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600
 GraphicRenderer::~GraphicRenderer() {
     delete context;
     delete tileset;
-    delete view;
+    delete camera;
 }
 
 sf::RenderWindow *GraphicRenderer::getContext() {
     return context;
 }
 
-sf::View *GraphicRenderer::getView() {
-    return view;
-}
+
 
 void GraphicRenderer::render(Player player) {
 
@@ -56,8 +57,8 @@ void GraphicRenderer::render(Player player) {
     Pair pos = player.getPos();
     sprite.move((float) pos.x, (float) pos.y);
 
-    getView()->setCenter(pos.x, pos.y);
-    getContext()->setView(*getView());
+    camera->setCenter(pos.x, 256);
+    getContext()->setView(*camera);
 
     // Draw.
     context->draw(sprite);
@@ -102,7 +103,6 @@ void GraphicRenderer::drawTiles(const Pair &playerPos) {
 void GraphicRenderer::setLevelView(const std::string path) {
     delete level;
     std::string filename = path + "/view.bin";
-    level = new LevelView(32, 32); //TODO : set size based on the path (ex .../foo32-32)
-    //TODO : actually, put a setting file in every level dir with size, and possibly other infos (music, shaders...)
+    level = new LevelView(32, 32);
     level->loadView(filename);
 }
