@@ -4,11 +4,14 @@
 
 #include "GraphicRenderer.h"
 #include "../model/ModelConstants.h"
+#include "SpriteFactory.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+
+//TODO charger une seule fois les sprites au lancement du jeu
 
 using namespace sf;
 
@@ -45,11 +48,12 @@ void GraphicRenderer::render(Player player) {
     sprite.setFillColor(Color(100, 240, 50));
 
     // Place sprite.
+    Sprite *sprite = spriteFactory.create(player);
     Pair pos = player.getPos();
-    sprite.move((float) pos.x, (float) pos.y);
+    sprite->move((float) pos.x, (float) pos.y);
 
     // Draw.
-    context->draw(sprite);
+    context->draw(*sprite);
 
     // Display.
     context->display();

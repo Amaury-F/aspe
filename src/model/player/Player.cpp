@@ -9,6 +9,8 @@
 #define GRAVITY 6
 #define GROUND_Y 252
 
+using namespace sf;
+
 Player::Player(Pair pos): pos(pos), speed(0,0) {}
 
 
@@ -26,7 +28,7 @@ void Player::move() {
     moveTo(pos + speed);
 }
 
-bool Player::onGround() {
+bool Player::onGround() const {
     //TODO check Ground under player.
     return pos.y >= GROUND_Y;
 }
@@ -34,12 +36,22 @@ bool Player::onGround() {
 void Player::handleKeys(const bool *keysPressed) {
     Pair speed(0,0);
 
+
     // Set speed according to keys
     if (keysPressed[Controls::LEFT]) {
         speed += Pair(-5, 0);
+        this->lastXDir = -1;
+        ++anim;
     }
+
     if (keysPressed[Controls::RIGHT]) {
         speed += Pair(5, 0);
+        this->lastXDir = 1;
+        ++anim;
+    }
+
+    if (speed.x == 0 || anim >= PLAYER_ANIM_MAX) {
+        anim = 0;
     }
 
     if (keysPressed[Controls::JUMP] && onGround()) {
@@ -63,5 +75,7 @@ void Player::update(const bool *keysPressed) {
     move();
 }
 
-
+std::string Player::describe() const {
+    return "player";
+}
 

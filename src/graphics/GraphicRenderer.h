@@ -9,6 +9,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../model/player/Player.h"
 #include "levelView/LevelView.h"
+#include "SpriteFactory.h"
 
 //chef du paquetage graphics
 class GraphicRenderer {
@@ -28,6 +29,8 @@ public:
 private:
     //contexte d'affichage (fenêtre)
     sf::RenderWindow *context;
+
+    SpriteFactory spriteFactory;
 
     TileSet *tileset;
     LevelView *level;
