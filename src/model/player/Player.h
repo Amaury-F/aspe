@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include "../Pair.h"
+#include "../CollisionHandler.h"
 
 #define PLAYER_ANIM_MAX 16
 
@@ -16,7 +17,7 @@ class Player {
 
 public:
 
-    Player(Pair pos);
+    Player(Pair pos, CollisionHandler *collisionHandler);
 
     Pair getPos() const {return pos;};
     Pair getSpeed() const {return speed;};
@@ -24,6 +25,7 @@ public:
     std::string describe() const;
     int getAnimState() const {return anim;};
     int getOrientation() const {return lastXDir;};
+    Pair getSize() const { return size;};
 
     //tout le mouvement, etc
     void update();
@@ -37,8 +39,13 @@ public:
 private:
     Pair pos;
     Pair speed;
+    Pair size;
     int anim = 0;
     int lastXDir = 1;
+
+    bool canMoveTo(Pair pos);
+
+    CollisionHandler *collisionHandler;
 
 };
 

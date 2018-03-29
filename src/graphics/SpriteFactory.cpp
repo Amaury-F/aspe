@@ -41,14 +41,17 @@ Sprite * SpriteFactory::create(const Player &entity) {
 Sprite * SpriteFactory::createFromPlayer(const Player &player, Texture *texture) {
     int offsetX = 0;
     int offsetY = 0;
+
+    Pair pSize = player.getSize();
+
     if (player.getOrientation() == -1) {
-        offsetY = ENTITY_HEIGHT;
+        offsetY = pSize.y;
     }
 
-    offsetX = player.getAnimState() / (PLAYER_ANIM_MAX / 4) * ENTITY_WIDTH;
+    offsetX = player.getAnimState() / (PLAYER_ANIM_MAX / 4) * pSize.x;
     if (!player.onGround()) {
-        offsetX = PLAYER_ANIM_MAX / (PLAYER_ANIM_MAX / 4) * ENTITY_WIDTH;
+        offsetX = PLAYER_ANIM_MAX / (PLAYER_ANIM_MAX / 4) * pSize.x;
     }
 
-    return new Sprite(*texture, IntRect(offsetX, offsetY, ENTITY_WIDTH, ENTITY_HEIGHT));
+    return new Sprite(*texture, IntRect(offsetX, offsetY, pSize.x, pSize.y));
 }

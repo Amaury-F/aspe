@@ -7,9 +7,7 @@
 
 #define STD_SIZE 16
 #define BLOCK_SIZE STD_SIZE
-#define ENTITY_SIZE 16
-#define ENTITY_WIDTH STD_SIZE
-#define ENTITY_HEIGHT (STD_SIZE + (STD_SIZE / 2))
+
 
 
 

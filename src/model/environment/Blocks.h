@@ -7,8 +7,8 @@
 
 typedef char block;
 
-class Blocks {
-public:
+namespace Blocks {
+
     enum Blck {
         AIR = 0,
         GROUND = 1,
@@ -68,6 +68,11 @@ public:
     bool isWall(block b);
 
     /**
+     * Indique si b est un block d'air
+     */
+    bool isAir(block b);
+
+    /**
      * Indique si b est un block de type pente et plafond.
      */
     bool isUp(block b);
@@ -90,9 +95,6 @@ public:
      */
     int slope(int x, block b);
 
-private:
-    Blocks() = default;
-    ~Blocks() = default;
 
 };
 

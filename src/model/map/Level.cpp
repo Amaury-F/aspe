@@ -42,7 +42,9 @@ block Level::getBlockAt(Pair pos) const {
 
     Pair cell = getCellOf(pos);
 
-    return terrain[cell.x][cell.y];
+    block b = terrain[cell.x][cell.y];
+
+    return b;
 }
 
 Pair Level::getCellOf(Pair pos) {

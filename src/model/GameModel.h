@@ -8,6 +8,7 @@
 
 #include "player/Player.h"
 #include "map/Level.h"
+#include "CollisionHandler.h"
 
 class GameModel {
 public :
@@ -27,6 +28,8 @@ public :
 private :
     Player *player;
     Level *level;
+
+    CollisionHandler *collisionHandler;
 };
 
 

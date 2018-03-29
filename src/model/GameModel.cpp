@@ -8,9 +8,12 @@
 #include "../events/Controls.h"
 
 
-GameModel::GameModel(): player(new Player(Pair(0,0))) {
+GameModel::GameModel(): collisionHandler(new CollisionHandler()) {
     level = new Level(32, 32);
     level->loadTerrain("../assets/map/test32-32/level.bin");
+
+    collisionHandler->setLevel(level);
+    player = new Player(Pair(0,0), collisionHandler);
 }
 
 void GameModel::update(const bool *keysPressed) {

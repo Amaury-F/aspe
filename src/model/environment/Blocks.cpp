@@ -13,6 +13,10 @@ bool Blocks::isWall(block b) {
     return b >= Blocks::WALL;
 }
 
+bool Blocks::isAir(block b) {
+    return b == 0;
+}
+
 bool Blocks::isUp(block b) {
     return (b >= Blocks::GROUND_SLOPENW1 && b <= Blocks::GROUND_SLOPENE5)
            || (b >= Blocks::WALL_SLOPENW1 && b <= Blocks::WALL_SLOPENE5);
