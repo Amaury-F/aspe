@@ -86,20 +86,19 @@ void Player::update() {
     int s = 0;
     int xDir = sign(speed.x);
     int yDir = sign(speed.y);
-
     while (s <= abs(speed.x) && canMoveTo(pos + Pair(s * xDir, 0))) {
         ++s;
     }
+    xShift = (s - 1) * xDir;
 
     s = 0;
     while (s <= abs(speed.y) && canMoveTo(pos + Pair(0, s * yDir))) {
         ++s;
     }
-
-
+    yShift = (s - 1) * yDir;
 
     speed = Pair(xShift, yShift);
-
+    move();
 }
 
 std::string Player::describe() const {

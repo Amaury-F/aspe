@@ -15,17 +15,18 @@ std::vector<block> CollisionHandler::getColliders(Pair pos, Pair size) {
 
     int i1 = pos.x;
     int j1 = pos.y;
-    int i2 = pos.x + size.x;
-    int j2 = pos.y + size.y;
+    int i2 = pos.x + size.x - 1;
+    int j2 = pos.y + size.y - 1;
 
     int i,j;
-    for (i = i1; i < i2 + BLOCK_SIZE; i += BLOCK_SIZE) {
-        for(j = j1; j < j2 + BLOCK_SIZE; j += BLOCK_SIZE) {
+    for (i = i1; i < i2; i += 1) {
+        for(j = j1; j < j2; j += 1) {
 
             block b = level->getBlockAt(Pair(i, j));
             colliders.push_back(b);
         }
     }
+
 
     return colliders;
 }

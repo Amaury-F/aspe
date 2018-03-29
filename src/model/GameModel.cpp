@@ -58,7 +58,7 @@ void GameModel::handleKeys(const bool *keysPressed) {
     }
 
     if (keysPressed[Controls::JUMP] && player->onGround()) {
-        speed += Pair(0, -10);
+        speed += Pair(0, -15);
     }
 
     player->setSpeed(player->getSpeed() + speed);
