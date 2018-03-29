@@ -8,7 +8,7 @@
 
 
 #define GRAVITY 1
-#define FRICTION 2
+#define FRICTION 1
 
 
 Player::Player(Pair pos, CollisionHandler *collisionHandler):
@@ -79,27 +79,27 @@ void Player::update() {
 
     if (canMoveTo(getPos() + getSpeed())) {
         move();
-    } else {
-
-        int i;
-        int xDir = sign(speed.x);
-        int yDir = sign(speed.y);
-        for (i = 0; i < abs(getSpeed().x); i++) {
-            if (canMoveTo(pos + Pair(xDir, 0))) {
-                xShift += xDir;
-            }
-        }
-
-        for (i = 0; i < abs(getSpeed().y); i++) {
-            if (canMoveTo(pos + Pair(0, yDir))) {
-                yShift += yDir;
-            }
-        }
-
-        speed = Pair(xShift, yShift);
+        return;
     }
 
-    move();
+
+    int s = 0;
+    int xDir = sign(speed.x);
+    int yDir = sign(speed.y);
+
+    while (s <= abs(speed.x) && canMoveTo(pos + Pair(s * xDir, 0))) {
+        ++s;
+    }
+
+    s = 0;
+    while (s <= abs(speed.y) && canMoveTo(pos + Pair(0, s * yDir))) {
+        ++s;
+    }
+
+
+
+    speed = Pair(xShift, yShift);
+
 }
 
 std::string Player::describe() const {
