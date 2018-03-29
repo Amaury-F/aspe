@@ -9,14 +9,14 @@ CollisionHandler::CollisionHandler() {
     level = nullptr;
 };
 
-std::vector<block> CollisionHandler::getColliders(Pair pos, int width, int height) {
+std::vector<block> CollisionHandler::getColliders(Pair pos, Pair size) {
 
     std::vector<block> colliders;
 
     int i1 = pos.x;
     int j1 = pos.y;
-    int i2 = (pos.x + width);
-    int j2 = (pos.y + height);
+    int i2 = pos.x + size.x;
+    int j2 = pos.y + size.y;
 
     int i,j;
     for(i = i1; i < i2 + BLOCK_SIZE; i += BLOCK_SIZE) {

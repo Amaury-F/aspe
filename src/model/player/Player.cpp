@@ -7,8 +7,8 @@
 #include "../ModelConstants.h"
 
 
-#define GRAVITY 6
-#define GROUND_Y 252
+#define GRAVITY 1
+#define FRICTION 2
 
 
 Player::Player(Pair pos, CollisionHandler *collisionHandler):
@@ -34,11 +34,11 @@ void Player::move() {
 }
 
 bool Player::onGround() const {
-    return ! canMoveTo(Pair(pos.x -1, pos.y-1));
+    return ! canMoveTo(Pair(pos.x, pos.y+1));
 }
 
 bool Player::canMoveTo(Pair pos) const {
-    std::vector<block> colliders = collisionHandler->getColliders(pos, size.x, size.y);
+    std::vector<block> colliders = collisionHandler->getColliders(pos, size);
 
     bool res = true;
     for (block b : colliders) {
@@ -54,20 +54,36 @@ void Player::update() {
     int xShift = 0;
     int yShift = 0;
 
+    //acceleration
     speed += Pair(0,GRAVITY);
+    if (speed.x > 0) {
+        speed.x -= FRICTION;
+    } else if (speed.x < 0) {
+        speed.x += FRICTION;
+    }
 
 
-    if (onGround() && getSpeed().y > 0) {
+    //speed cap
+    if (abs(speed.y) > 10) {
+        speed.y = sign(speed.y) * 10;
+    }
+    if (abs(speed.x) > 5) {
+        speed.x = sign(speed.x) * 5;
+    }
+
+
+    if (onGround() && speed.y > 0) {
         speed.y = 0;
     }
+
 
     if (canMoveTo(getPos() + getSpeed())) {
         move();
     } else {
 
         int i;
-        int xDir = 0 + (std::signbit(speed.x) ? -1 : 1);
-        int yDir = 0 + (std::signbit(speed.y) ? -1 : 1);
+        int xDir = sign(speed.x);
+        int yDir = sign(speed.y);
         for (i = 0; i < abs(getSpeed().x); i++) {
             if (canMoveTo(pos + Pair(xDir, 0))) {
                 xShift += xDir;
@@ -76,12 +92,11 @@ void Player::update() {
 
         for (i = 0; i < abs(getSpeed().y); i++) {
             if (canMoveTo(pos + Pair(0, yDir))) {
-                xShift += yDir;
+                yShift += yDir;
             }
         }
 
         speed = Pair(xShift, yShift);
-        //moveTo(pos + Pair(xShift,yShift));
     }
 
     move();
@@ -96,12 +111,9 @@ void Player::setAnimState(int anim) {
 }
 
 void Player::setOrientation(int o) {
-    if (o == 0) {
-        lastXDir = 0;
-    } else if (o > 0) {
-        lastXDir = 1;
-    } else {
-        lastXDir = -1;
-    }
+    lastXDir = sign(o);
 }
 
+int Player::sign(int n) {
+    return 0 + (std::signbit(n) ? -1 : 1);
+}

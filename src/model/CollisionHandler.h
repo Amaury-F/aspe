@@ -16,7 +16,7 @@ public :
     CollisionHandler();
     ~CollisionHandler();
     void setLevel(Level *level);
-    std::vector<block> getColliders(Pair pos, int width, int height);
+    std::vector<block> getColliders(Pair pos, Pair size);
 
 
 private :

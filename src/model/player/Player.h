@@ -44,6 +44,7 @@ private:
     int lastXDir = 1;
 
     bool canMoveTo(Pair pos) const;
+    int sign(int n);
 
     CollisionHandler *collisionHandler;
 
