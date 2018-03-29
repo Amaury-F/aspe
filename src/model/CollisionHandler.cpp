@@ -21,9 +21,23 @@ std::vector<block> CollisionHandler::getColliders(Pair pos, Pair size) {
     int i,j;
     for (i = i1; i < i2; i += 1) {
         for(j = j1; j < j2; j += 1) {
-
             block b = level->getBlockAt(Pair(i, j));
-            colliders.push_back(b);
+            //TODO Renvoyer seulement les blocks qui collide (pas d'air pas de pente si y ok)
+            if(Blocks::isSlope(b)) {
+                // GERER LES PENTES
+                if(Blocks::isDown(b)) {
+                    if (!(j > (i + Blocks::slope(i, b)))) {
+                        colliders.push_back(b);
+                    }
+                }
+                if(Blocks::isUp(b)) {
+                    if (!(j < (i + Blocks::slope(i, b)))) {
+                        colliders.push_back(b);
+                    }
+                }
+            } else if (!Blocks::isAir(b)){
+                colliders.push_back(b);
+            }
         }
     }
 

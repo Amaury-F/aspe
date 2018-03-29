@@ -39,23 +39,7 @@ bool Player::onGround() const {
 
 bool Player::canMoveTo(Pair pos) const {
     std::vector<block> colliders = collisionHandler->getColliders(pos, size);
-
-    bool res = true;
-    for (block b : colliders) {
-        if (Blocks::isDown(b)) {
-            if (!(pos.y > (pos.x + Blocks::slope(pos.x, b)))) {
-                res = false;
-            }
-        } else if (Blocks::isUp(b)) {
-            if (!(pos.y < (pos.x + Blocks::slope(pos.x, b)))) {
-                res = false;
-            }
-        } else if (! Blocks::isAir(b)) {
-            res = false;
-        }
-    }
-
-    return res;
+    return colliders.empty();
 }
 
 void Player::update() {
