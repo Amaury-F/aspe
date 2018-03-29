@@ -30,6 +30,10 @@ void EventHandler::pullEvents() {
 
     }
 
+    if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
+        context->close();
+    }
+
     Keyboard::Key *bindings = Controls::getBindings();
     for (int i = 0; i < Controls::NBR_CTRLS; ++i) {
         keysPressed[i] = Keyboard::isKeyPressed(bindings[i]);
