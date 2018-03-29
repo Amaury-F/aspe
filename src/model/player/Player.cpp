@@ -28,7 +28,7 @@ void Player::move() {
     moveTo(pos + speed);
 }
 
-bool Player::onGround() {
+bool Player::onGround() const {
     //TODO check Ground under player.
     return pos.y >= GROUND_Y;
 }
@@ -36,24 +36,22 @@ bool Player::onGround() {
 void Player::handleKeys(const bool *keysPressed) {
     Pair speed(0,0);
 
-    this->state = STANDING;
 
     // Set speed according to keys
     if (keysPressed[Controls::LEFT]) {
         speed += Pair(-5, 0);
-        this->state = MOVING_LEFT;
-        if (this->previousState != this->state) {
-            this->texValue = 0;
-        } else {
-            this->texValue = (this->texValue + 1) % 4;
-        }
-        this->previousState = this->state;
+        this->lastXDir = -1;
+        ++anim;
     }
 
     if (keysPressed[Controls::RIGHT]) {
         speed += Pair(5, 0);
-        this->state = MOVING_RIGHT;
-        this->texValue = (this->texValue + 1) % 4;
+        this->lastXDir = 1;
+        ++anim;
+    }
+
+    if (speed.x == 0 || anim >= PLAYER_ANIM_MAX) {
+        anim = 0;
     }
 
     if (keysPressed[Controls::JUMP] && onGround()) {
@@ -75,5 +73,9 @@ void Player::update(const bool *keysPressed) {
     }
 
     move();
+}
+
+std::string Player::describe() const {
+    return "player";
 }
 

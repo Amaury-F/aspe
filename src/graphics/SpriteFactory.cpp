@@ -2,63 +2,53 @@
 // Created by godarqu1 on 26/02/18.
 //
 
+#include <stdexcept>
+#include <unordered_map>
+#include <sstream>
+#include <iostream>
 #include "SpriteFactory.h"
+#include "../model/ModelConstants.h"
 
-#define PLAYER_SPRITE "../assets/guy.png"
 
 using namespace sf;
+using namespace std;
 
 SpriteFactory::SpriteFactory() {}
 
 SpriteFactory::~SpriteFactory() = default;
 
-sf::Sprite SpriteFactory::getSprite() {
+Sprite * SpriteFactory::create(const Player &entity) {
+    Texture *tex;
+    string entDesc = entity.describe();
+    try {
+        tex = textures.at(entDesc);
+    } catch (out_of_range &e) {
+        tex = new Texture();
+        stringstream texturePath;
+        texturePath << "../assets/" << entDesc << ".png";
+        tex->loadFromFile(texturePath.str());
+        textures.insert({entDesc, tex});
+    }
+
+    if (entity.describe() == "player") {
+        return this->createFromPlayer((Player) entity, tex);
+    }
+    Sprite * sprite = new Sprite(*tex, IntRect(0, 0, 16, 32));
+
     return sprite;
 }
 
-Player::PlayerState SpriteFactory::getPreviousState() {
-    return previousState;
-}
-
-void SpriteFactory::setPreviousState(Player::PlayerState state) {
-    previousState = state;
-}
-
-void SpriteFactory::initTextures() {
-    //Sprite standard (initial et inactif)
-    defaultTex.loadFromFile(PLAYER_SPRITE, sf::IntRect(0, 0, 16, 24));
-
-    //Sprites du déplacement à droite
-    playerTex[0][0].loadFromFile(PLAYER_SPRITE, sf::IntRect(16, 24, 16, 24));
-    playerTex[0][1].loadFromFile(PLAYER_SPRITE, sf::IntRect(0, 24, 16, 24));
-    playerTex[0][2].loadFromFile(PLAYER_SPRITE, sf::IntRect(48, 24, 16, 24));
-    playerTex[0][3].loadFromFile(PLAYER_SPRITE, sf::IntRect(32, 24, 16, 24));
-
-    //Sprites du déplacement à gauche
-    playerTex[1][0].loadFromFile(PLAYER_SPRITE, sf::IntRect(16, 48, 16, 24));
-    playerTex[1][1].loadFromFile(PLAYER_SPRITE, sf::IntRect(0, 48, 16, 24));
-    playerTex[1][2].loadFromFile(PLAYER_SPRITE, sf::IntRect(48, 48, 16, 24));
-    playerTex[1][3].loadFromFile(PLAYER_SPRITE, sf::IntRect(32, 48, 16, 24));
-}
-
-void SpriteFactory::setPlayerSprite(Player player) {
-    Player::PlayerState state = player.getState();
-    int n = player.getTexValue();
-    switch(state) {
-        case Player::STANDING:
-            sprite.setTexture(defaultTex);
-            setPreviousState(state);
-            break;
-
-        case Player::MOVING_LEFT:
-            sprite.setTexture(playerTex[1][n]);
-            setPreviousState(state);
-            break;
-
-        case Player::MOVING_RIGHT:
-            sprite.setTexture(playerTex[0][n]);
-            setPreviousState(state);
-            break;
+Sprite * SpriteFactory::createFromPlayer(const Player &player, Texture *texture) {
+    int offsetX = 0;
+    int offsetY = 0;
+    if (player.getLastXDir() == -1) {
+        offsetY = ENTITY_HEIGHT;
     }
-}
 
+    offsetX = player.getAnimState() / (PLAYER_ANIM_MAX / 4) * ENTITY_WIDTH;
+    if (!player.onGround()) {
+        offsetX = PLAYER_ANIM_MAX / (PLAYER_ANIM_MAX / 4) * ENTITY_WIDTH;
+    }
+
+    return new Sprite(*texture, IntRect(offsetX, offsetY, ENTITY_WIDTH, ENTITY_HEIGHT));
+}

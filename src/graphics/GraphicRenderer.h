@@ -8,6 +8,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../model/player/Player.h"
+#include "SpriteFactory.h"
+
 //chef du paquetage graphics
 class GraphicRenderer {
 public:
@@ -21,6 +23,8 @@ public:
 private:
     //contexte d'affichage (fenêtre)
     sf::RenderWindow *context;
+
+    SpriteFactory spriteFactory;
 };
 
 

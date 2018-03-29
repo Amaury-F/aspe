@@ -8,6 +8,7 @@
 #include <vector>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <unordered_map>
 #include "../model/player/Player.h"
 
 class SpriteFactory {
@@ -16,18 +17,12 @@ public:
     SpriteFactory();
     ~SpriteFactory();
 
-    sf::Sprite getSprite();
-    Player::PlayerState getPreviousState();
+    sf::Sprite * create(const Player &entity);
+    sf::Sprite * createFromPlayer(const Player &player, sf::Texture *texture);
 
-    void initTextures();
-    void setPlayerSprite(Player player);
-    void setPreviousState(Player::PlayerState state);
 
-private:
-    sf::Texture defaultTex;
-    sf::Texture playerTex[2][4];
-    sf::Sprite sprite;
-    Player::PlayerState previousState;
+        private:
+    std::unordered_map<std::string, sf::Texture *> textures;
 
 };
 

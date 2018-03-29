@@ -6,25 +6,24 @@
 #define JEU2D_PLAYER_H
 
 #include <vector>
+#include <string>
 #include "../Pair.h"
+
+#define PLAYER_ANIM_MAX 16
 
 // C'est le joueur.
 class Player {
 
 public:
-    enum PlayerState {
-        STANDING = 0,
-        MOVING_RIGHT = 1,
-        MOVING_LEFT = 2
-    };
 
     Player(Pair pos);
 
     Pair getPos() const {return pos;};
     Pair getSpeed() const {return speed;};
-    bool onGround();
-    PlayerState getState() {return state;};
-    int getTexValue() {return texValue;};
+    bool onGround() const;
+    std::string describe() const;
+    int getAnimState() const {return anim;};
+    int getLastXDir() const {return lastXDir;};
 
     //tout le mouvement, etc
     void update(const bool *keysPressed);
@@ -37,9 +36,8 @@ public:
 private:
     Pair pos;
     Pair speed;
-    PlayerState state = STANDING;
-    PlayerState previousState = STANDING;
-    int texValue = 0;
+    int anim = 0;
+    int lastXDir = 1;
 
 };
 

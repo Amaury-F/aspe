@@ -13,6 +13,7 @@
 using namespace sf;
 
 GraphicRenderer::GraphicRenderer() : context(new RenderWindow(VideoMode(800, 600), "jeu2D")) {
+
     // Set up graphic rendering.
     context->setVerticalSyncEnabled(true);
     context->setFramerateLimit(30);
@@ -30,17 +31,15 @@ void GraphicRenderer::render(Player player) {
     context->clear(Color(0, 0, 0));
 
     // Set player actual sprite
-    SpriteFactory spriteFactory;
-    spriteFactory.initTextures();
-    spriteFactory.setPlayerSprite(player);
+
 
     // Place sprite.
-    Sprite sprite = spriteFactory.getSprite();
+    Sprite *sprite = spriteFactory.create(player);
     Pair pos = player.getPos();
-    sprite.move((float) pos.x, (float) pos.y);
+    sprite->move((float) pos.x, (float) pos.y);
 
     // Draw.
-    context->draw(sprite);
+    context->draw(*sprite);
 
     // Display.
     context->display();
