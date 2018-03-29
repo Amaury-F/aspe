@@ -16,7 +16,7 @@
 using namespace sf;
 
 GraphicRenderer::GraphicRenderer() :
-        context(new RenderWindow(VideoMode(800, 600), "jeu2D")),
+        context(new RenderWindow(VideoMode(800, 600), "jeu2D", Style::Fullscreen)),
         camera(new View(Vector2f(400, 256), Vector2f(VIEW_WIDTH, VIEW_HEIGHT))) {
 
     // Set up graphic rendrering.
@@ -30,7 +30,7 @@ GraphicRenderer::GraphicRenderer() :
     tileset = new TileSet();
 
     //load test level
-    setLevelView("../assets/map/test32-32");
+    setLevelView("../assets/map/test128-32");
 }
 
 GraphicRenderer::~GraphicRenderer() {
@@ -105,6 +105,6 @@ void GraphicRenderer::drawTiles(const Pair &playerPos) {
 void GraphicRenderer::setLevelView(const std::string path) {
     delete level;
     std::string filename = path + "/view.bin";
-    level = new LevelView(32, 32);
+    level = new LevelView(128, 32);
     level->loadView(filename);
 }

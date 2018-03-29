@@ -9,6 +9,7 @@
 
 #define GRAVITY 1
 #define FRICTION 1
+#define CLIMB_SIZE 5
 
 
 Player::Player(Pair pos, CollisionHandler *collisionHandler):
@@ -75,19 +76,37 @@ void Player::update() {
     }
 
 
-    int s = 0;
+    int xs = 0;
+    int ys = 0;
+
     int xDir = sign(speed.x);
     int yDir = sign(speed.y);
-    while (s <= abs(speed.x) && canMoveTo(pos + Pair(s * xDir, 0))) {
-        ++s;
-    }
-    xShift = (s - 1) * xDir;
 
-    s = 0;
-    while (s <= abs(speed.y) && canMoveTo(pos + Pair(0, s * yDir))) {
-        ++s;
+    while (ys <= abs(speed.y) && canMoveTo(pos + Pair(0, ys * yDir))) {
+        ++ys;
     }
-    yShift = (s - 1) * yDir;
+    yShift = (ys - 1) * yDir;
+
+    while (xs <= abs(speed.x)) {
+
+        int k = 0;
+        for (k = 0; k <= CLIMB_SIZE; ++k) {
+            if (canMoveTo(pos + Pair(xs * xDir, -k))) {
+                ++xs;
+                ys -= k;
+                break;
+            }
+        }
+        if (k == CLIMB_SIZE + 1) {
+            break;
+        }
+
+
+    }
+    xShift = (xs - 1) * xDir;
+
+
+
 
     speed = Pair(xShift, yShift);
     move();
