@@ -7,6 +7,7 @@
 
 Game::Game() {
     graphicRenderer = new GraphicRenderer();
+    graphicRenderer->setTextures();
     eventHandler = new EventHandler(graphicRenderer->getContext());
     gameModel = new GameModel();
 }

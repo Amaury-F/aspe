@@ -6,7 +6,8 @@
 #define JEU2D_GAMEMODEL_H
 
 
-#include "player/Player.h"
+#include "../graphics/PlayerView.h"
+#include "../graphics/SpriteFactory.h"
 
 class GameModel {
 public :
@@ -14,10 +15,10 @@ public :
     ~GameModel();
 
     void update(const bool *keysPressed);
-    Player getEntities();
+    PlayerView getEntities();
 
 private :
-    Player *player;
+    PlayerView *player;
 };
 
 

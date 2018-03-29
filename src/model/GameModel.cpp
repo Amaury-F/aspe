@@ -7,14 +7,14 @@
 #include "../events/EventHandler.h"
 
 //TODO trouver meilleure initialisation
-GameModel::GameModel(): player(new Player(Pair(0,0))) {
+GameModel::GameModel(): player(new PlayerView(Pair(0,0))) {
 }
 
 void GameModel::update(const bool *keysPressed) {
     player->update(keysPressed);
 }
 
-Player GameModel::getEntities() {
+PlayerView GameModel::getEntities() {
     return *player;
 }
 
