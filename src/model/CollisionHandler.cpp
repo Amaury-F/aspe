@@ -1,7 +1,3 @@
-//
-// Created by amaury on 29/03/18.
-//
-
 #include "CollisionHandler.h"
 
 
