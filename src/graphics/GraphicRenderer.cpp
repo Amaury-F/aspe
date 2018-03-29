@@ -44,8 +44,6 @@ void GraphicRenderer::render(Player player) {
     drawTiles(player.getPos());
 
     // Create player's sprite and colour.
-    RectangleShape sprite(Vector2f(ENTITY_SIZE, ENTITY_SIZE));
-    sprite.setFillColor(Color(100, 240, 50));
 
     // Place sprite.
     Sprite *sprite = spriteFactory.create(player);
