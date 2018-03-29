@@ -1,10 +1,4 @@
-//
-// Created by fauveama on 18/01/18.
-//
-
-#include <iostream>
 #include "Game.h"
-#include "events/EventHandler.h"
 
 Game::Game() {
     graphicRenderer = new GraphicRenderer();

@@ -1,17 +1,6 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #include "GraphicRenderer.h"
-#include "../model/ModelConstants.h"
-#include "SpriteFactory.h"
-
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-
-//TODO charger une seule fois les sprites au lancement du jeu
 
 using namespace sf;
 
@@ -19,17 +8,17 @@ GraphicRenderer::GraphicRenderer() :
         context(new RenderWindow(VideoMode(800, 600), "jeu2D", Style::Fullscreen)),
         camera(new View(Vector2f(400, 256), Vector2f(VIEW_WIDTH, VIEW_HEIGHT))) {
 
-    // Set up graphic rendrering.
+    // Met en place le rendu graphique.
     context->setVerticalSyncEnabled(true);
     context->setFramerateLimit(30);
 
-    // Set up view
+    // Met en place la vue.
     context->setView(*camera);
 
-    //load tileset
+    // Initialise le tileset.
     tileset = new TileSet();
 
-    //load test level
+    // Charge le niveau.
     setLevelView("../assets/map/test128-32");
 }
 
@@ -52,9 +41,9 @@ void GraphicRenderer::render(Player player) {
 
     drawTiles(player.getPos());
 
-    // Create player's sprite and colour.
+    // Crée le sprite et la couleur du joueur.
 
-    // Place sprite.
+    // Place le sprite.
     Sprite *sprite = spriteFactory.create(player);
     Pair pos = player.getPos();
     sprite->move((float) pos.x, (float) pos.y);
@@ -62,14 +51,14 @@ void GraphicRenderer::render(Player player) {
     camera->setCenter(pos.x, 256);
     getContext()->setView(*camera);
 
-    // Draw.
+    // Dessine le sprite.
     context->draw(*sprite);
 
-    // Display.
+    // Affiche le sprite.
     context->display();
 }
 
-#define RENDER_DISTANCE 40 * BLOCK_SIZE
+#define RENDER_DISTANCE (40 * BLOCK_SIZE)
 
 void GraphicRenderer::drawTiles(const Pair &playerPos) {
 

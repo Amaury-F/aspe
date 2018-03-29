@@ -1,7 +1,3 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #include "Pair.h"
 
 Pair::Pair(int x, int y): x(x), y(y) {}
@@ -20,7 +16,9 @@ bool Pair::operator!=(const Pair &a)  const {
     return !(a == b);
 }
 
-
+/*
+ * Permet d'utiliser des opérateurs entre deux couples d'entier.
+ */
 #define DEF_BINOP(OP)                           \
 Pair Pair::operator OP(const Pair &a) {         \
     Pair r(a);                                  \

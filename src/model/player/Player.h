@@ -1,7 +1,3 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #ifndef JEU2D_PLAYER_H
 #define JEU2D_PLAYER_H
 

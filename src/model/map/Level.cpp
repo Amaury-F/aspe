@@ -1,7 +1,3 @@
-//
-// Created by amaury on 23/02/18.
-//
-
 #include <fstream>
 #include <iostream>
 #include "Level.h"
@@ -36,6 +32,7 @@ void Level::loadTerrain(std::string filename) {
 }
 
 block Level::getBlockAt(Pair pos) const {
+    // Si le block demandé n'est pas stocké dans le fichier on renvoie un block d'Air
     if (pos.x < 0 || pos.y < 0 || pos.x >= width * BLOCK_SIZE || pos.y >= height * BLOCK_SIZE) {
         return Blocks::AIR;
     }

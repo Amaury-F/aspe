@@ -1,11 +1,5 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #include <cmath>
 #include "Player.h"
-#include "../ModelConstants.h"
-
 
 #define GRAVITY 1
 #define FRICTION 1

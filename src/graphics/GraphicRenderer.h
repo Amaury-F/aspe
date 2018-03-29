@@ -1,7 +1,3 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #ifndef JEU2D_GRAPHICRENDERER_H
 #define JEU2D_GRAPHICRENDERER_H
 
@@ -13,31 +9,51 @@
 #define VIEW_WIDTH 800
 #define VIEW_HEIGHT 600
 
-//chef du paquetage graphics
+/**
+ * Classe principale du paquetage graphics.
+ */
 class GraphicRenderer {
 public:
     GraphicRenderer();
     ~GraphicRenderer();
 
+    /**
+     * Getter sur la fenêtre principale.
+     * @return context
+     */
     sf::RenderWindow * getContext();
-    //prendra plus tard un ensemble d'entités à afficher
+
+    /**
+     * Affiche le rendu de(s) entité(s).
+     * @param player
+     */
     void render(Player player);
 
     /**
-     * set view to the levelView stored in path
+     * Applique la vue stocker au chemin path au levelView.
      */
     void setLevelView(std::string path);
 
 private:
-    //contexte d'affichage (fenêtre)
+    /**
+     * Fenêtre principale.
+     */
     sf::RenderWindow *context;
+
     sf::View *camera;
 
+    /**
+     * Fabrique de sprite pour les entités(association sprite-entité).
+     */
     SpriteFactory spriteFactory;
 
     TileSet *tileset;
     LevelView *level;
 
+    /**
+     * Applique les sprites aux blocks autour du joueur.
+     * @param playerPos
+     */
     void drawTiles(const Pair &playerPos);
 };
 

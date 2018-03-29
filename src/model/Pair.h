@@ -1,12 +1,11 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #ifndef JEU2D_PAIR_H
 #define JEU2D_PAIR_H
 
 #include <iostream>
 
+/**
+ * Gestion des couples d'entiers (utiles a la postion, la vitesse ...).
+ */
 class Pair {
 public:
     Pair(int x, int y);

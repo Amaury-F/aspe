@@ -1,7 +1,3 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #include <vector>
 #include <iostream>
 #include "GameModel.h"
@@ -9,31 +5,24 @@
 
 
 GameModel::GameModel(): collisionHandler(new CollisionHandler()) {
+    // On initialise le niveau.
     level = new Level(128, 32);
     level->loadTerrain("../assets/map/test128-32/level.bin");
 
+    // On passe le niveau au CollisionHandler.
     collisionHandler->setLevel(level);
+
+    // On crée le joueur.
     player = new Player(Pair(0,0), collisionHandler);
 }
 
 void GameModel::update(const bool *keysPressed) {
     handleKeys(keysPressed);
+    // Demandes aux entités de se mettre à jour.
     player->update();
 }
 
 Player GameModel::getEntities() {
-    return *player;
-}
-
-Level * GameModel::getLevel() {
-    return level;
-}
-
-void GameModel::loadLevel(Level *level) {
-    this->level = level;
-}
-
-Player GameModel::getPlayer() {
     return *player;
 }
 

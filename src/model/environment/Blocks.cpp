@@ -1,9 +1,7 @@
-//
-// Created by amaury on 23/02/18.
-//
-
 #include "Blocks.h"
 #include "../ModelConstants.h"
+
+#define INF 5000
 
 bool Blocks::isGround(block b) {
     return b >= Blocks::GROUND;
@@ -59,12 +57,12 @@ int Blocks::slope(int x, block b) {
     } else if (b == Blocks::GROUND_SLOPESE4 || b == Blocks::WALL_SLOPESE4) {
         return x < BLOCK_SIZE / 2 ? 0 :  2 * x - BLOCK_SIZE;
     } else if (b == Blocks::GROUND_SLOPENW2 || b == Blocks :: WALL_SLOPENW2) {
-        return x < BLOCK_SIZE / 2 ? -5000 : 2 * x - BLOCK_SIZE;
+        return x < BLOCK_SIZE / 2 ? - INF : 2 * x - BLOCK_SIZE;
     } else if (b == Blocks::GROUND_SLOPENE2 || b == Blocks::WALL_SLOPENE2) {
-        return x < BLOCK_SIZE / 2 ? BLOCK_SIZE - 2 * x : -5000;
+        return x < BLOCK_SIZE / 2 ? BLOCK_SIZE - 2 * x : - INF;
     } else if (b == Blocks::GROUND_SLOPESW2 || b == Blocks::WALL_SLOPESW2) {
-        return x < BLOCK_SIZE / 2 ? 5000 : (BLOCK_SIZE - x) * 2;
+        return x < BLOCK_SIZE / 2 ? INF : (BLOCK_SIZE - x) * 2;
     } else if (b == Blocks::GROUND_SLOPESE2 || b == Blocks::WALL_SLOPESE2) {
-        return x < BLOCK_SIZE / 2 ? BLOCK_SIZE - 2 * x : 5000;
+        return x < BLOCK_SIZE / 2 ? BLOCK_SIZE - 2 * x : INF;
     }
 }
