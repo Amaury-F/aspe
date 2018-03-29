@@ -21,7 +21,7 @@ GraphicRenderer::GraphicRenderer() :
 
     // Set up graphic rendrering.
     context->setVerticalSyncEnabled(true);
-    context->setFramerateLimit(5);
+    context->setFramerateLimit(30);
 
     // Set up view
     context->setView(*camera);

@@ -43,7 +43,7 @@ private:
     int anim = 0;
     int lastXDir = 1;
 
-    bool canMoveTo(Pair pos);
+    bool canMoveTo(Pair pos) const;
 
     CollisionHandler *collisionHandler;
 

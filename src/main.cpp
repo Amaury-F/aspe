@@ -8,7 +8,7 @@ int main() {
 
     while (game.isRunning()) {
 
-        while (! sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A));
+        //while (! sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A));
 
         game.handleEvents();
         game.updateModel();

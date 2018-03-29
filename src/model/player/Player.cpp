@@ -34,11 +34,10 @@ void Player::move() {
 }
 
 bool Player::onGround() const {
-    //TODO check Ground under player.
-    return pos.y >= GROUND_Y;
+    return ! canMoveTo(Pair(pos.x -1, pos.y-1));
 }
 
-bool Player::canMoveTo(Pair pos) {
+bool Player::canMoveTo(Pair pos) const {
     std::vector<block> colliders = collisionHandler->getColliders(pos, size.x, size.y);
 
     bool res = true;
@@ -81,7 +80,8 @@ void Player::update() {
             }
         }
 
-        moveTo(pos + Pair(xShift,yShift));
+        speed = Pair(xShift, yShift);
+        //moveTo(pos + Pair(xShift,yShift));
     }
 
     move();

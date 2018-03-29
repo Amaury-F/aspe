@@ -19,12 +19,10 @@ std::vector<block> CollisionHandler::getColliders(Pair pos, int width, int heigh
     int j2 = (pos.y + height);
 
     int i,j;
-    std::cout << "_______" << std::endl;
     for(i = i1; i < i2 + BLOCK_SIZE; i += BLOCK_SIZE) {
         for(j = j1; j < j2 + BLOCK_SIZE; j += BLOCK_SIZE) {
 
             block b = level->getBlockAt(Pair(i, j));
-            std::cout << (int) b << std::endl;
             colliders.push_back(b);
         }
     }
