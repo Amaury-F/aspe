@@ -15,9 +15,14 @@ public :
     ~GameModel();
 
     void update(const bool *keysPressed);
+    Player getPlayer();
     Player getEntities();
     Level * getLevel();
     void loadLevel(Level *level);
+
+    void handleKeys(const bool *keysPressed);
+
+
 
 private :
     Player *player;

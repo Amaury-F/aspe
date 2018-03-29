@@ -23,14 +23,15 @@ public:
     bool onGround() const;
     std::string describe() const;
     int getAnimState() const {return anim;};
-    int getLastXDir() const {return lastXDir;};
+    int getOrientation() const {return lastXDir;};
 
     //tout le mouvement, etc
-    void update(const bool *keysPressed);
+    void update();
 
     void moveTo(Pair pos);
-    void handleKeys(const bool *keysPressed);
     void setSpeed(Pair speed);
+    void setAnimState(int anim);
+    void setOrientation(int o);
     void move();
 
 private:

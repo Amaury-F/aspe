@@ -3,13 +3,11 @@
 //
 
 #include "Player.h"
-#include "../../events/EventHandler.h"
-#include "../../events/Controls.h"
+
 
 #define GRAVITY 6
 #define GROUND_Y 252
 
-using namespace sf;
 
 Player::Player(Pair pos): pos(pos), speed(0,0) {}
 
@@ -33,38 +31,8 @@ bool Player::onGround() const {
     return pos.y >= GROUND_Y;
 }
 
-void Player::handleKeys(const bool *keysPressed) {
-    Pair speed(0,0);
 
-
-    // Set speed according to keys
-    if (keysPressed[Controls::LEFT]) {
-        speed += Pair(-5, 0);
-        this->lastXDir = -1;
-        ++anim;
-    }
-
-    if (keysPressed[Controls::RIGHT]) {
-        speed += Pair(5, 0);
-        this->lastXDir = 1;
-        ++anim;
-    }
-
-    if (speed.x == 0 || anim >= PLAYER_ANIM_MAX) {
-        anim = 0;
-    }
-
-    if (keysPressed[Controls::JUMP] && onGround()) {
-        speed += Pair(0, -50);
-    }
-
-    setSpeed(speed);
-}
-
-
-void Player::update(const bool *keysPressed) {
-    setSpeed(Pair(0,0));
-    handleKeys(keysPressed);
+void Player::update() {
 
     speed += Pair(0,GRAVITY);
 
@@ -77,5 +45,19 @@ void Player::update(const bool *keysPressed) {
 
 std::string Player::describe() const {
     return "player";
+}
+
+void Player::setAnimState(int anim) {
+    this->anim = anim;
+}
+
+void Player::setOrientation(int o) {
+    if (o == 0) {
+        lastXDir = 0;
+    } else if (o > 0) {
+        lastXDir = 1;
+    } else {
+        lastXDir = -1;
+    }
 }
 

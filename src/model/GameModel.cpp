@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "GameModel.h"
-#include "../events/EventHandler.h"
+#include "../events/Controls.h"
 
 
 GameModel::GameModel(): player(new Player(Pair(0,0))) {
@@ -14,7 +14,8 @@ GameModel::GameModel(): player(new Player(Pair(0,0))) {
 }
 
 void GameModel::update(const bool *keysPressed) {
-    player->update(keysPressed);
+    handleKeys(keysPressed);
+    player->update();
 }
 
 Player GameModel::getEntities() {
@@ -28,5 +29,39 @@ Level * GameModel::getLevel() {
 void GameModel::loadLevel(Level *level) {
     this->level = level;
 }
+
+Player GameModel::getPlayer() {
+    return *player;
+}
+
+void GameModel::handleKeys(const bool *keysPressed) {
+    Pair speed(0,0);
+
+    // Set speed according to keys
+    if (keysPressed[Controls::LEFT]) {
+        speed += Pair(-5, 0);
+        player->setOrientation(-1);
+        player->setAnimState(player->getAnimState() + 1);
+    }
+
+    if (keysPressed[Controls::RIGHT]) {
+        speed += Pair(5, 0);
+        player->setOrientation(1);
+        player->setAnimState(player->getAnimState() + 1);
+    }
+
+    if (speed.x == 0 || player->getAnimState() >= PLAYER_ANIM_MAX) {
+        player->setAnimState(0);
+    }
+
+    if (keysPressed[Controls::JUMP] && player->onGround()) {
+        speed += Pair(0, -50);
+    }
+
+    player->setSpeed(speed);
+}
+
+
+
 
 GameModel::~GameModel() = default;

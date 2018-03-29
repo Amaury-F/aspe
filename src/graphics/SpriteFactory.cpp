@@ -41,7 +41,7 @@ Sprite * SpriteFactory::create(const Player &entity) {
 Sprite * SpriteFactory::createFromPlayer(const Player &player, Texture *texture) {
     int offsetX = 0;
     int offsetY = 0;
-    if (player.getLastXDir() == -1) {
+    if (player.getOrientation() == -1) {
         offsetY = ENTITY_HEIGHT;
     }
 
