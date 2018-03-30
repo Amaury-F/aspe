@@ -11,7 +11,7 @@ TileSet::TileSet():
     width(16),
     height(16),
     data(new Texture) {
-    data->loadFromFile("../assets/tiles/minecraft_terrain.png");
+    data->loadFromFile("../assets/tiles/tileset.png");
 }
 
 

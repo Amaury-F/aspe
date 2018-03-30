@@ -19,7 +19,7 @@ GraphicRenderer::GraphicRenderer() :
     tileset = new TileSet();
 
     // Charge le niveau.
-    setLevelView("../assets/map/test128-32");
+    setLevelView("../assets/map/test512-32");
 }
 
 GraphicRenderer::~GraphicRenderer() {
@@ -67,15 +67,7 @@ void GraphicRenderer::drawTiles(const Pair &playerPos) {
 
             tile t = level->getTileAt(Pair(i, j));
 
-            if (t == TileSet::AIR) {
-                RectangleShape airSprite(Vector2f(BLOCK_SIZE, BLOCK_SIZE));
-                airSprite.setFillColor(Color(50, 100, 240));
-
-                Pair blockPos = LevelView::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
-                airSprite.move((float) blockPos.x, (float) blockPos.y);
-
-                context->draw(airSprite);
-            } else {
+            if (t != TileSet::AIR) {
                 Sprite sprite;
                 Texture texture = *(tileset->getTexture());
                 sprite.setTexture(texture);
@@ -94,6 +86,6 @@ void GraphicRenderer::drawTiles(const Pair &playerPos) {
 void GraphicRenderer::setLevelView(const std::string path) {
     delete level;
     std::string filename = path + "/view.bin";
-    level = new LevelView(128, 32);
+    level = new LevelView(512, 32);
     level->loadView(filename);
 }

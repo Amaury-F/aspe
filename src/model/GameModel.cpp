@@ -6,8 +6,8 @@
 
 GameModel::GameModel(): collisionHandler(new CollisionHandler()) {
     // On initialise le niveau.
-    level = new Level(128, 32);
-    level->loadTerrain("../assets/map/test128-32/level.bin");
+    level = new Level(512, 32);
+    level->loadTerrain("../assets/map/test512-32/level.bin");
 
     // On passe le niveau au CollisionHandler.
     collisionHandler->setLevel(level);
