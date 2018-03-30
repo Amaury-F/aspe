@@ -1,7 +1,3 @@
-//
-// Created by amaury on 23/02/18.
-//
-
 #ifndef JEU2D_LEVEL_H
 #define JEU2D_LEVEL_H
 
@@ -12,9 +8,7 @@
 #include "../Pair.h"
 
 /**
- * This class contains information on a level terrain :
- * the blocks contained in it and their position
- * the size of the level
+ * Classe contenant toutes les informations relative au niveau courrant.
  */
 class Level {
 public:
@@ -22,20 +16,26 @@ public:
     ~Level();
 
     /**
-     * load the terrain stored in file filename to the memory
+     * Charge dans la mémoire le terrain(niveau) stocké dans le fichier filename.
      * @param filename
      */
     void loadTerrain(std::string filename);
 
     /**
-     * Get the block where position pos is in
+     * Getter sur le block à la position pos.
+     * @return blockAt
      */
     block getBlockAt(Pair pos) const;
 
+    /**
+     * Getter sur la taille du niveau.
+     * @return levelSize
+     */
     Pair getSize() const;
 
     /**
-     * get the block cell that contains pposition os
+     * Getter sur la cellule qui contient la position pos.
+     * @return cellPos
      */
     static Pair getCellOf(Pair pos);
 

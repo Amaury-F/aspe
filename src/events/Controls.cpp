@@ -1,12 +1,8 @@
-//
-// Created by amaury on 01/02/18.
-//
-
 #include "Controls.h"
 
 using namespace sf;
 
-//trivial, espace <=> jump
+
 sf::Keyboard::Key Controls::bindings[] {
         Keyboard::Key::Up,
         Keyboard::Key::Down,

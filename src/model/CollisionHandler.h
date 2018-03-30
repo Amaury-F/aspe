@@ -1,7 +1,3 @@
-//
-// Created by amaury on 29/03/18.
-//
-
 #ifndef JEU2D_COLLISIONHANDLER_H
 #define JEU2D_COLLISIONHANDLER_H
 
@@ -15,7 +11,19 @@ public :
 
     CollisionHandler();
     ~CollisionHandler();
+
+    /**
+     * Donne le level au collisionHandler.
+     * @param level
+     */
     void setLevel(Level *level);
+
+    /**
+     * Renvoie les blocks avec lesquelles le joueur vas entrer en collision.
+     * @param pos
+     * @param size
+     * @return
+     */
     std::vector<block> getColliders(Pair pos, Pair size);
 
 

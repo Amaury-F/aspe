@@ -1,17 +1,10 @@
-//
-// Created by amaury on 29/01/18.
-//
-
 #include <SFML/Window/Event.hpp>
 #include "EventHandler.h"
-#include "Controls.h"
 
 using namespace sf;
 
 EventHandler::EventHandler(sf::Window *context):
-        context(context)
-        {
-}
+        context(context) { }
 
 EventHandler::~EventHandler() = default;
 
@@ -21,13 +14,11 @@ bool * EventHandler::getPressedKeys() {
 
 void EventHandler::pullEvents() {
 
-
-    Event event;
+    Event event{};
     while (context->pollEvent(event)) {
         if (event.type == Event::Closed) {
             context->close();
         }
-
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
@@ -39,7 +30,3 @@ void EventHandler::pullEvents() {
         keysPressed[i] = Keyboard::isKeyPressed(bindings[i]);
     }
 }
-
-
-
-

@@ -1,19 +1,13 @@
-//
-// Created by godarqu1 on 26/02/18.
-//
-
 #include <stdexcept>
 #include <unordered_map>
 #include <sstream>
-#include <iostream>
 #include "SpriteFactory.h"
-#include "../model/ModelConstants.h"
 
 
 using namespace sf;
 using namespace std;
 
-SpriteFactory::SpriteFactory() {}
+SpriteFactory::SpriteFactory() = default;
 
 SpriteFactory::~SpriteFactory() = default;
 
@@ -48,6 +42,7 @@ Sprite * SpriteFactory::createFromPlayer(const Player &player, Texture *texture)
         offsetY = pSize.y;
     }
 
+    // Réagit en fonction de l'étape de l'animation du joueur.
     offsetX = player.getAnimState() / (PLAYER_ANIM_MAX / 4) * pSize.x;
     if (!player.onGround()) {
         offsetX = PLAYER_ANIM_MAX / (PLAYER_ANIM_MAX / 4) * pSize.x;

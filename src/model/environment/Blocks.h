@@ -1,9 +1,9 @@
-//
-// Created by amaury on 23/02/18.
-//
-
 #ifndef JEU2D_BLOCKS_H
 #define JEU2D_BLOCKS_H
+
+/**
+ * Regroupe les informations relatives aux blocks.
+ */
 
 typedef char block;
 

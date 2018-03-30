@@ -2,19 +2,16 @@
 
 using namespace sf;
 
-
+/**
+ * Fontion principale.
+ * Boucle de jeu.
+ */
 int main() {
     Game game;
-
     while (game.isRunning()) {
-
-        //while (! sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A));
-
         game.handleEvents();
         game.updateModel();
         game.renderWindow();
-
-
     }
     return 0;
 }

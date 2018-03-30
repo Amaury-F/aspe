@@ -1,17 +1,18 @@
-//
-// Created by amaury on 01/02/18.
-//
-
 #ifndef JEU2D_CONTROLS_H
 #define JEU2D_CONTROLS_H
 
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
 
-//gère les bindings touche-action
+/**
+ * Gère les inputs (bindings touche-action).
+ */
 class Controls {
 
 public:
+    /**
+     * Enumération des différents inputs.
+     */
     enum Cntrl {
         UP = 0,
         DOWN = 1,
@@ -21,14 +22,19 @@ public:
 
         NBR_CTRLS = 5
     };
-
+    /**
+     * Getter sur le tableau d'association de touche-action.
+     * @return bindings
+     */
     static sf::Keyboard::Key * getBindings();
 
 private:
     Controls() = default;
     ~Controls() = default;
 
-    //tableau d'association touche-action
+    /**
+     * Tableau d'association touche-action.
+     */
     static sf::Keyboard::Key bindings[NBR_CTRLS];
 
 };
