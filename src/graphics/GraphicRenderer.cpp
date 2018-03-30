@@ -37,7 +37,7 @@ sf::RenderWindow *GraphicRenderer::getContext() {
 void GraphicRenderer::render(Player player) {
 
     // Init: clearing openGL context.
-    context->clear(Color(0, 0, 0));
+    context->clear(Color(0, 100, 200));
 
     drawTiles(player.getPos());
 
@@ -69,8 +69,7 @@ void GraphicRenderer::drawTiles(const Pair &playerPos) {
 
             if (t != TileSet::AIR) {
                 Sprite sprite;
-                Texture texture = *(tileset->getTexture());
-                sprite.setTexture(texture);
+                sprite.setTexture(*(tileset->getTexture()));
                 sprite.setTextureRect(tileset->tileToRect(t));
 
                 Pair tilePos = LevelView::getCellOf(Pair(i, j)) * Pair(BLOCK_SIZE, BLOCK_SIZE);
