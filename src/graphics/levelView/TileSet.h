@@ -12,13 +12,6 @@ typedef char tile;
 
 class TileSet {
 public:
-    enum Tles {
-        AIR = 0,
-        DIRT = 1,
-        STONE = 2,
-
-        NBR_TILES = STONE + 1
-    };
 
     TileSet();
     ~TileSet();

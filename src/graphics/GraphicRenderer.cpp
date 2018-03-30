@@ -67,7 +67,7 @@ void GraphicRenderer::drawTiles(const Pair &playerPos) {
 
             tile t = level->getTileAt(Pair(i, j));
 
-            if (t != TileSet::AIR) {
+            if (t != 0) {
                 Sprite sprite;
                 sprite.setTexture(*(tileset->getTexture()));
                 sprite.setTextureRect(tileset->tileToRect(t));
