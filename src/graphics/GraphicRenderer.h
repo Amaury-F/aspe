@@ -24,13 +24,13 @@ public:
     sf::RenderWindow * getContext();
 
     /**
-     * Affiche le rendu de(s) entité(s).
+     * Calcule le rendu graphique et l'affiche.
      * @param player
      */
     void render(Player player);
 
     /**
-     * Applique la vue stocker au chemin path au levelView.
+     * Applique la vue stockée au chemin path au levelView.
      */
     void setLevelView(std::string path);
 
