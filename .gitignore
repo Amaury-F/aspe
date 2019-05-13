@@ -1,0 +1,7 @@
+.idea
+.idea/*
+build-debug/
+doc/rapport.aux
+doc/rapport.log
+doc/rapport.synctex.gz
+doc/rapport.toc
