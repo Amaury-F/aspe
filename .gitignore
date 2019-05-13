@@ -1,5 +1,4 @@
-.idea
-.idea/*
+.idea/
 build-debug/
 doc/rapport.aux
 doc/rapport.log
